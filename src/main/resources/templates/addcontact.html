@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section},~{::title})">
+<head>
+	<meta charset="UTF-8" />
+	<title th:text="${Title}"></title>
+</head>
+<body>
+    <section class="container-fluid px-0 d-flex" style="">
+     
+        <!-- <h1>Welcome to dashboard</h1>
+        
+        
+        <div th:text="${session.CurrentUser.name}"></div> -->
+        <!-- <div class="left">
+            <div class="upper container-fluid mt-2" id="upper" style="">
+        
+                <i class="fa-solid fa-bars" id="bars" style="font-size: 24px; cursor: pointer;" ></i>
+            </div>
+            <div class="lower" id="lower" style="height:91.8vh; width: 18%; display: none;" >
+        <div class="cross container"><i class="fa-solid fa-xmark" id="xbtn" style="font-size: 22px; cursor: pointer;"></i></div>
+                <ul>
+                    <li class="left-li"> <i class="fa-solid fa-house left-icon"></i> Home</li>
+                    <li class="left-li"><i class="fa-regular fa-address-book left-icon"></i> View Contacts</li>
+                    <li class="left-li"><i class="fa-solid fa-address-card left-icon"></i> Add Contact</li>
+                    <li class="left-li"><i class="fa-solid fa-user left-icon"></i> Your Profile</li>
+                    <li class="left-li"><i class="fa-solid fa-gear left-icon"></i> Settings</li>
+                    <li class="left-li"><i class="fa-solid fa-right-from-bracket left-icon"></i> Logout</li>
+                </ul>
+        
+            </div>
+        </div>
+        
+        <div class="container right">
+        
+        </div> -->
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100vh;">
+            <!-- <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+              <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+              <span class="fs-4">Sidebar</span>
+            </a> -->
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+              <li class="nav-item my-1">
+                <a href="/dashboard" class="nav-link nav-links" aria-current="page" style="color:black;">
+                    <i class="fa-solid fa-house left-icon"></i> Home
+                </a>
+              </li>
+              <li class="nav-item mt-1">
+                <a th:href="@{'/view-contacts/0'}" class="nav-link nav-links" aria-current="page" style="color:black;">
+                <i class="fa-regular fa-address-book left-icon"></i> View Contacts
+                </a>
+              </li>
+              <li class="nav-item mt-1">
+                <a href="/add-contact" class="nav-link nav-links active" aria-current="page">
+                <i class="fa-solid fa-address-card left-icon"></i> Add Contact
+                </a>
+              </li>
+              <li class="nav-item mt-1">
+                <a href="/profile" class="nav-link nav-links" aria-current="page" style="color:black;">
+                <i class="fa-solid fa-user left-icon"></i> Your Profile
+            </a>
+              </li>
+              <li class="nav-item mt-1">
+                <a href="#" class="nav-link nav-links" aria-current="page" style="color:black;">
+                <i class="fa-solid fa-gear left-icon"></i> Settings
+            </a>
+              </li>
+              <li class="nav-item mt-1">
+              <a href="/logout" class="nav-link nav-links" aria-current="page" style="color:black;">
+                <i class="fa-solid fa-right-from-bracket left-icon"></i> Logout
+            </a>
+              </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+              <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                <img th:src="@{/images/default2.png}" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong th:text="${session.CurrentUser.name}" style="font-weight: 500;"></strong>
+              </a>
+              <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                <li><a class="dropdown-item" href="#">New project...</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="container profile-container" style="display: flex; justify-content: center;  padding-top: 2%; flex-direction: column;" >
+            <div class="alert text-center my-1" role="alert" th:if="${session.Message}" th:text="${session.Message.name}" th:classappend="${session.Message.type}">
+              <th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+					
+            </div>
+            <div class="card col-md-6 offset-3" style="height: 99%;">
+             
+              <div class="card-body">
+                <h5 class="card-title h3 text-center" th:text="${THeading}">Add New Contact</h5>
+                <form th:action="@{${FormHandler}}" method="post" th:object="${Contact}" enctype="multipart/form-data">
+                <div class="mb-3 mt-4">
+                  <!-- <label for="exampleFormControlName" class="form-label">Enter Your Name</label> -->
+                  <div class="d-flex">
+                    
+                 <div class="d-flex justify-content-center align-items-center" style="border: 1px solid #e2e2e2; width: 45px;  border-top-left-radius: 8px; border-bottom-left-radius: 8px; height: 38px;"><i class="fa-solid fa-user-plus"></i></div>
+                 <div class="w-100">
+                 <input type="text" class="form-control " id="exampleFormControlName" placeholder="Enter Name here" style="border-top-left-radius:0px; border-bottom-left-radius: 0px;" name="name" th:classappend="${#fields.hasErrors('name')?'is-invalid':''}" th:value="${Contact.name}">
+                 <div class="invalid-feedback" th:each="e:${#fields.errors('name')}" th:text="${e}"></div>
+                </div>
+              </div>
+                <div class="mb-3 d-flex mt-4">
+                  <!-- <label for="exampleFormControlNickname" class="form-label">Enter Your Nickname</label> -->
+                  <div class="d-flex justify-content-center align-items-center" style="border: 1px solid #e2e2e2; width: 45px;  border-top-left-radius: 8px; border-bottom-left-radius: 8px; height: 38px;"><i class="fa-solid fa-user"></i></div>
+                  <div class="w-100">
+                  <input type="text" class="form-control" id="exampleFormControlNickname" placeholder="Enter Nick Name here" style="border-top-left-radius:0px; border-bottom-left-radius: 0px;" name="secondName" th:classappend="${#fields.hasErrors('secondName')?'is-invalid':''}" th:value="${Contact.secondName}">
+                  <div class="invalid-feedback" th:each="e:${#fields.errors('secondName')}" th:text="${e}"></div>
+                </div>
+              </div>
+                <div class="mb-3 d-flex">
+                  <!-- <label for="exampleFormControlPhone" class="form-label">Enter Your Phone Number</label> -->
+                  <div class="d-flex justify-content-center align-items-center" style="border: 1px solid #e2e2e2; width: 45px;  border-top-left-radius: 8px; border-bottom-left-radius: 8px; height: 38px;"><i class="fa-solid fa-phone"></i></div>
+                  <div class="w-100">
+                  <input type="text" class="form-control" id="exampleFormControlPhone" placeholder="Enter Phone Number here" style="border-top-left-radius:0px; border-bottom-left-radius: 0px;" name="phone" th:classappend="${#fields.hasErrors('phone')?'is-invalid':''}" th:value="${Contact.phone}">
+                  <div class="invalid-feedback" th:each="e:${#fields.errors('phone')}" th:text="${e}"></div>
+                </div>
+              </div>
+                <div class="mb-3 d-flex">
+                  <!-- <label for="exampleFormControlEmail" class="form-label">Enter Your Email</label> -->
+                  <div class="d-flex justify-content-center align-items-center" style="border: 1px solid #e2e2e2; width: 45px;  border-top-left-radius: 8px; border-bottom-left-radius: 8px; height: 38px;"><i class="fa-solid fa-message"></i></div>
+                  <div class="w-100">
+                  <input type="email" class="form-control" id="exampleFormControlEmail" placeholder="Enter Email here" style="border-top-left-radius:0px; border-bottom-left-radius: 0px;" name="email" th:classappend="${#fields.hasErrors('email')?'is-invalid':''}" th:value="${Contact.email}">
+                  <div class="invalid-feedback" th:each="e:${#fields.errors('email')}" th:text="${e}"></div>
+                </div>
+              </div>
+                <div class="mb-3 d-flex">
+                  <!-- <label for="exampleFormControlWork" class="form-label">Enter Your Work</label> -->
+                  <div class="d-flex justify-content-center align-items-center" style="border: 1px solid #e2e2e2; width: 45px;  border-top-left-radius: 8px; border-bottom-left-radius: 8px; height: 38px;"><i class="fa-solid fa-briefcase"></i></div>
+                  <div class="w-100">
+                  <input type="text" class="form-control" id="exampleFormControlWork" placeholder="Enter Work here" style="border-top-left-radius:0px; border-bottom-left-radius: 0px;" name="work" th:classappend="${#fields.hasErrors('work')?'is-invalid':''}" th:value="${Contact.work}">
+                  <div class="invalid-feedback" th:each="e:${#fields.errors('work')}" th:text="${e}"></div>
+                </div>
+              </div>
+                <div class="mb-3 d-flex">
+                  <!-- <label for="exampleFormControlTextarea1" class="form-label">Enter Description</label> -->
+                  <div class="w-100">
+                  <textarea class="form-control" id="mytextarea" th:text="${Contact.description}" rows="5" placeholder="Enter Contact Description" name="description" th:classappend="${#fields.hasErrors('description')?'is-invalid':''}" cols="20"></textarea>
+                  <div class="invalid-feedback" th:each="e:${#fields.errors('description')}" th:text="${e}"></div>
+                </div>
+              </div>
+                <div class="mb-4">
+                  <label for="formFile" class="form-label">Select Picture</label>
+                  <input class="form-control" type="file" id="formFile" th:classappend="${#fields.hasErrors('image')?'is-invalid':''}" name="profilePic">
+                  <div class="invalid-feedback" th:each="e:${#fields.errors('image')}" th:text="${e}"></div>
+                </div>
+                <div class="mb-2 text-center">
+                  <button  type="submit" class="btn btn-success">Add New Contact</button>
+                </div>
+              </form>
+              </div>
+            </div>
+    
+        </div>        
+
+          </div>
+          <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+  tinymce.init({
+  selector: '#mytext'
+});
+</script>
+        </section>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section},~{::title})">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>View Contacts</title>
+</head>
+
+<body>
+    <section class="container-fluid px-0 d-flex" style="">
+
+        <!-- <h1>Welcome to dashboard</h1>
+        
+        
+        <div th:text="${session.CurrentUser.name}"></div> -->
+        <!-- <div class="left">
+            <div class="upper container-fluid mt-2" id="upper" style="">
+        
+                <i class="fa-solid fa-bars" id="bars" style="font-size: 24px; cursor: pointer;" ></i>
+            </div>
+            <div class="lower" id="lower" style="height:91.8vh; width: 18%; display: none;" >
+        <div class="cross container"><i class="fa-solid fa-xmark" id="xbtn" style="font-size: 22px; cursor: pointer;"></i></div>
+                <ul>
+                    <li class="left-li"> <i class="fa-solid fa-house left-icon"></i> Home</li>
+                    <li class="left-li"><i class="fa-regular fa-address-book left-icon"></i> View Contacts</li>
+                    <li class="left-li"><i class="fa-solid fa-address-card left-icon"></i> Add Contact</li>
+                    <li class="left-li"><i class="fa-solid fa-user left-icon"></i> Your Profile</li>
+                    <li class="left-li"><i class="fa-solid fa-gear left-icon"></i> Settings</li>
+                    <li class="left-li"><i class="fa-solid fa-right-from-bracket left-icon"></i> Logout</li>
+                </ul>
+        
+            </div>
+        </div>
+        
+        <div class="container right">
+        
+        </div> -->
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 100vh;">
+            <!-- <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+              <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+              <span class="fs-4">Sidebar</span>
+            </a> -->
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item my-1">
+                    <a href="/dashboard" class="nav-link nav-links" aria-current="page" style="color:black;">
+                        <i class="fa-solid fa-house left-icon"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a th:href="@{'/view-contacts/0'}" class="nav-link nav-links active" aria-current="page"  >
+                        <i class="fa-regular fa-address-book left-icon"></i> View Contacts
+                    </a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a href="/add-contact" class="nav-link nav-links " aria-current="page" style="color:black;">
+                        <i class="fa-solid fa-address-card left-icon"></i> Add Contact
+                    </a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a href="/profile" class="nav-link nav-links" aria-current="page" style="color:black;">
+                        <i class="fa-solid fa-user left-icon"></i> Your Profile
+                    </a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a href="#" class="nav-link nav-links" aria-current="page" style="color:black;">
+                        <i class="fa-solid fa-gear left-icon"></i> Settings
+                    </a>
+                </li>
+                <li class="nav-item mt-1">
+                    <a href="/logout" class="nav-link nav-links" aria-current="page" style="color:black;">
+                        <i class="fa-solid fa-right-from-bracket left-icon"></i> Logout
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+                    id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img th:src="@{/images/default2.png}" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong th:text="${session.CurrentUser.name}" style="font-weight: 500;"></strong>
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container profile-container"
+            style="padding-top: 2%;">
+
+<div class="container">
+    <div class="container text-center" style="border: 1px solid black; border-radius: 8px; background-color:whitesmoke;">
+        <h2 class="my-4">Your Contacts</h2>
+    </div>
+    <div class="search-container">
+        
+    
+    <div class="mb-0">
+        <input type="text" class="form-control" id="search-input" placeholder="Search Your Contact here..." onkeyup="search()">
+      </div>
+     <div class="alert text-center my-1" role="alert" th:if="${session.Message}" th:text="${session.Message.name}" th:classappend="${session.Message.type}">
+              <th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+					
+            </div>
+            
+            <div class="search-results">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                      The current link item
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+                    <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+                    <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+                    <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a>
+                  </div>
+            </div>
+    
+        </div>
+    
+    
+    <table class="table table-hover my-1">
+        <thead>
+          <tr>
+            <th scope="col">Contact ID</th>
+            <th scope="col">FirstName</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="tr" th:each="e:${Contacts}" th:onclick="redirectionF([[${e.cid}]])" style="cursor: pointer;">
+            <th scope="row" th:text="${'SCM2024'+e.cid}"></th>
+            <td> <img src="" alt="" class="profile-photo" th:src="@{'/images/'+${e.image}}" th:if="${e.image!=null}" th:alt="${e.image}" th:style="'border-radius:50%'">
+               
+                
+                
+                <span th:text="${e.name}"></span></td>
+            <td th:text="${e.phone}">Otto</td>
+            <td th:text="${e.email}"></td>
+            <td>
+                <a class="btn btn-danger btn-sm" th:href="${'/contact/delete='+e.cid}">Delete</a>
+                <a class="btn btn-success btn-sm" th:href="${'/contact/update='+e.cid}">Update</a>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+</div>
+
+<div class="container">
+<nav aria-label="Page navigation example" class="my-3" style="display:flex; justify-content: center; align-items: center;" >
+    <ul class="pagination text-center">
+      <li class="page-item" th:if="${CurrentPage!=0}"><a class="page-link" th:href="@{'/view-contacts/'+${CurrentPage==0?'0':CurrentPage-1}}">Previous</a></li>
+      <li class="page-item"  th:each="i :${#numbers.sequence(1,totalPages)}"><a class="page-link" th:classappend="${CurrentPage==i-1}?'active':''"  th:text="${i}" th:href="@{'/view-contacts/'+${i-1}}"></a></li>
+      <li class="page-item" th:if="${CurrentPage!=totalPages-1}"><a class="page-link" th:href="@{'/view-contacts/'+${CurrentPage==totalPages-1?totalPages-1:CurrentPage+1}}">Next</a></li>
+    </ul>
+  </nav>
+</div>
+
+        </div>
+        
+
+        </div>
+        <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script th:src="@{/js/script.js}"></script>
+
+    </section>
+</body>
+
+</html>

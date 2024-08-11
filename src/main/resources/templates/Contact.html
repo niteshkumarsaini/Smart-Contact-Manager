@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section},~{::title})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCM - Contact</title>
+</head>
+<body>
+    <h1>This is individual user page</h1>
+
+    <section class="container-fluid profile-container" style="height: 92.3vh; display: flex; align-items: center; width:100vw">
+        <div class="card col-md-6 offset-3 my-4"> 
+          <div class="container text-center">
+            <img th:src="@{'/images/'+${Contact.get(0).image}}" class="card-img-top" id="profile" style="border-radius: 50%;">
+          </div>
+            <div class="card-body">
+              <h2 class="card-title text-center mb-3" th:text="${ActiveContact.get(0).name}"></h2>
+            <div class="container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>      
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Work</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" th:text="${'SCM2024'+ActiveContact.get(0).cid}"></th>
+                    <td th:text="${ActiveContact.get(0).email}">niteshsaini1296@gmail.com</td>
+                    <td th:text="${ActiveContact.get(0).phone}"></td>
+                    <td th:text="${ActiveContact.get(0).work}"></td>
+                  </tr>
+              
+                </tbody>
+              </table>
+              <div class="container text-center my-4">
+                <div class="container">
+                  <a class="btn btn btn-danger" th:href="${'/contact/delete='+ActiveContact.get(0).cid}">Delete</a>
+                  <a class="btn btn btn-primary" th:href="@{'/contact/update='+${+ActiveContact.get(0).cid}}">Update</a>
+                </div>
+                
+                <div class="container my-2">
+<a class="btn btn-sm btn-warning text-light" href="/view-contacts/0">Go Back</a>
+                </div>
+              </div>
+            </div>
+             
+
+
+
+
+
+
+
+            </div>
+          </div>
+
+    </section>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section},~{::title})">
+<head>
+	<meta charset="UTF-8" />
+	<title th:text="${Title}"></title>
+	
+	
+</head>
+<body>
+<section class="container-fluid px-0 d-flex" >
+<!-- <h1>Welcome to dashboard</h1>
+
+
+<div th:text="${session.CurrentUser.name}"></div> -->
+<!-- <div class="left">
+	<div class="upper container-fluid mt-2" id="upper" style="">
+
+
+
+<div class="container right">
+
+</div> -->
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; height: 92.4vh;">
+    <!-- <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+      <span class="fs-4">Sidebar</span>
+    </a> -->
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item my-1">
+        <a href="/dashboard" class="nav-link  nav-links" aria-current="page" style="color: black;">
+			<i class="fa-solid fa-house left-icon"></i> Home
+        </a>
+      </li>
+      <li class="nav-item mt-1">
+        <a th:href="@{'/view-contacts/0'}" class="nav-link nav-links" aria-current="page" style="color:black;">
+        <i class="fa-regular fa-address-book left-icon"></i> View Contacts
+        </a>
+      </li>
+      <li class="nav-item mt-1">
+        <a href="/add-contact" class="nav-link nav-links" aria-current="page" style="color:black;">
+		<i class="fa-solid fa-address-card left-icon"></i> Add Contact
+        </a>
+      </li>
+      <li class="nav-item mt-1">
+        <a href="/profile" class="nav-link nav-links active" aria-current="page" >
+		<i class="fa-solid fa-user left-icon"></i> Your Profile
+    </a>
+      </li>
+      <li class="nav-item mt-1">
+        <a href="#" class="nav-link nav-links" aria-current="page" style="color:black;">
+		<i class="fa-solid fa-gear left-icon"></i> Settings
+    </a>
+      </li>
+	  <li class="nav-item mt-1">
+      <a href="/logout" class="nav-link nav-links" aria-current="page" style="color:black;">
+		<i class="fa-solid fa-right-from-bracket left-icon"></i> Logout
+    </a>
+      </li>
+    </ul>
+    <hr>
+    <div class="dropdown">
+      <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+        <img th:src="@{/images/default2.png}" alt="" width="32" height="32" class="rounded-circle me-2">
+        <strong th:text="${session.CurrentUser.name}" style="font-weight: 500;"></strong>
+      </a>
+      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+        <li><a class="dropdown-item" href="#">New project...</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Sign out</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container profile-container" th:style="'display: flex; justify-content: center; padding-top: 8%; '"  >
+
+    <div class="card" style="width: 22rem; height: 78%;">
+      <div class="container text-center">
+      <img th:src="@{/images/userprofile.png}" class="card-img-top" alt="..." style="height:150px; border-radius: 50%;" width="150px">
+    </div>
+      <div class="card-body">
+        <div class="container text-center">
+        <h5 class="card-title" th:text="${session.CurrentUser.name}"></h5>
+      </div>
+      <table class="table">
+  <thead class="text-center">
+    
+  </thead>
+  <tbody class="text-center">
+    <tr>
+      <th scope="row">User ID</th>
+      <td>SCM202402</td>
+
+    </tr>
+    <tr>
+      <th scope="row">Email ID</th>
+      <td>niteshsaini1296@gmail.com</td>
+
+    </tr>
+    <tr>
+      <th scope="row">Name</th>
+      <td colspan="2">Nitesh Kumar</td>
+    </tr>
+    <tr>
+      <td colspan="2" style="border: none;">
+        <a class="btn btn-danger btn my-3" th:href="@{/dashboard}">Go Back</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
